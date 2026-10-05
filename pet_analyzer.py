@@ -1,69 +1,78 @@
 ```python
 from PIL import Image
-import requests
 
 
 def analyze_pet(image):
-    """
-    Analyzes a pet image and returns a simple description,
-    possible concerns, and care suggestions.
-    """
 
     try:
-        # Basic image validation
+
         if image is None:
             return {
                 "pet": "No image uploaded",
                 "description": "Please upload a pet image.",
                 "health": "Unable to analyze",
-                "care": "Upload a clear image of the pet."
+                "care": "Please upload a clear pet image."
             }
 
-        # Make sure the image can be opened
         if not isinstance(image, Image.Image):
             image = Image.open(image)
 
         image = image.convert("RGB")
 
-        # Simple image-based analysis
         width, height = image.size
 
         if width < 100 or height < 100:
             return {
                 "pet": "Image too small",
-                "description": "The uploaded image is too small to analyze properly.",
-                "health": "Unable to determine",
-                "care": "Upload a clearer and larger pet image."
+                "description": "The uploaded image is too small.",
+                "health": "Unable to determine.",
+                "care": "Please upload a clearer image."
             }
 
         return {
             "pet": "Pet detected",
             "description": (
                 "The uploaded image appears to contain a pet. "
-                "The image can be used for basic visual observation."
+                "Basic visual observations can be made from the image."
             ),
             "health": (
-                "No definite health condition can be diagnosed from "
-                "a single image. Check for visible changes in eyes, "
-                "fur, skin, posture, or behavior."
+                "No definite medical condition can be diagnosed "
+                "from an image alone. Look for visible changes "
+                "in the eyes, skin, fur, posture, or behavior."
             ),
             "care": (
-                "Keep the pet clean and hydrated, provide proper food, "
-                "and consult a veterinarian if you notice unusual symptoms."
+                "Provide clean water, proper food, regular grooming, "
+                "and veterinary care if unusual symptoms are noticed."
             )
         }
 
-    except Exception as e:
+    except Exception:
+
         return {
             "pet": "Analysis failed",
             "description": "The image could not be processed.",
             "health": "Unable to analyze the image.",
-            "care": "Please upload a clear JPG or PNG image.",
-            "error": str(e)
+            "care": "Please upload a clear JPG or PNG image."
         }
 ```
 
-### 2. Replace `app.py` completely
+**Very important:** after saving, `pet_analyzer.py` must NOT contain:
+
+```python
+from dotenv import load_dotenv
+```
+
+and must NOT contain:
+
+```python
+load_dotenv()
+```
+
+---
+
+### 2. Also replace `app.py`
+
+Your `app.py` should contain:
 
 ```python
 import streamlit as st
@@ -80,12 +89,14 @@ st.set_page_config(
 
 
 st.title("PetSense AI")
-st.subheader("AI-Powered Pet Image Analysis")
 
+st.subheader(
+    "AI-Powered Pet Image Analysis"
+)
 
 st.write(
-    "Upload a pet image to get basic information, "
-    "observations, and care suggestions."
+    "Upload a pet image to get basic observations "
+    "and care suggestions."
 )
 
 
@@ -113,49 +124,29 @@ if uploaded_file is not None:
 
         st.success("Analysis completed")
 
-
         st.markdown("### Pet")
 
-        st.write(result.get("pet", "Not available"))
-
+        st.write(
+            result["pet"]
+        )
 
         st.markdown("### Description")
 
         st.write(
-            result.get(
-                "description",
-                "No description available."
-            )
+            result["description"]
         )
-
 
         st.markdown("### Health Observation")
 
         st.write(
-            result.get(
-                "health",
-                "No health information available."
-            )
+            result["health"]
         )
-
 
         st.markdown("### Care Suggestions")
 
         st.write(
-            result.get(
-                "care",
-                "No care suggestions available."
-            )
+            result["care"]
         )
-
-
-        if "error" in result:
-
-            st.warning(
-                "Technical details: "
-                + result["error"]
-            )
-
 
 else:
 
@@ -164,45 +155,53 @@ else:
     )
 ```
 
-### 3. Replace `requirements.txt`
+---
 
-Your Streamlit Cloud project should have a `requirements.txt` file containing:
+### 3. `requirements.txt`
+
+Replace the whole file with:
 
 ```text
 streamlit
 pillow
-requests
 ```
 
-### 4. Important
+You **do not need `python-dotenv`** for this version.
 
-You **do not need**:
+---
+
+### 4. Check your GitHub folder
+
+Your `main` folder should look like:
 
 ```text
-python-dotenv
+petsense_ai
+│
+└── main
+    │
+    ├── app.py
+    ├── pet_analyzer.py
+    └── requirements.txt
 ```
 
-and you should **remove this line** from `pet_analyzer.py`:
+The key thing is that **`app.py` and `pet_analyzer.py` must be in the same folder**.
 
-```python
+### 5. Then redeploy
+
+Your log already shows:
+
+```text
+Pulling code changes from Github...
+Processing dependencies...
+Updated app!
+```
+
+After replacing **`pet_analyzer.py`**, commit the change and let Streamlit redeploy.
+
+If the next error still says:
+
+```text
 from dotenv import load_dotenv
 ```
 
-Also remove anything like:
-
-```python
-load_dotenv()
-```
-
-### 5. Streamlit Cloud
-
-After replacing the files:
-
-1. Save `app.py`
-2. Save `pet_analyzer.py`
-3. Save `requirements.txt`
-4. Push/commit the changes to GitHub
-5. Streamlit Cloud will redeploy automatically.
-6. If it doesn't, click **Reboot app**.
-
-This version removes the `dotenv` error completely and does **not require a Hugging Face token or `.env` file**.
+then GitHub is still serving the old `pet_analyzer.py` file — because the new file above contains **zero `dotenv` imports**.
