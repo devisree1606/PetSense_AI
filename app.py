@@ -10,7 +10,6 @@ st.set_page_config(
     layout="wide"
 )
 
-
 st.title("PetSense AI")
 
 st.subheader(
@@ -22,12 +21,10 @@ st.write(
     "health observations, and care suggestions."
 )
 
-
 uploaded_file = st.file_uploader(
     "Upload Pet Image",
     type=["jpg", "jpeg", "png"]
 )
-
 
 if uploaded_file is not None:
 
@@ -48,16 +45,11 @@ if uploaded_file is not None:
         st.success("Analysis completed")
 
         st.markdown("### Pet")
-
         st.write(
-            result.get(
-                "pet",
-                "Pet detected"
-            )
+            result.get("pet", "Pet detected")
         )
 
         st.markdown("### Description")
-
         st.write(
             result.get(
                 "description",
@@ -66,7 +58,6 @@ if uploaded_file is not None:
         )
 
         st.markdown("### Health Observation")
-
         st.write(
             result.get(
                 "health",
@@ -75,7 +66,6 @@ if uploaded_file is not None:
         )
 
         st.markdown("### Care Suggestions")
-
         st.write(
             result.get(
                 "care",
