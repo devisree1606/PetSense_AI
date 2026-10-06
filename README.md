@@ -5,7 +5,6 @@ PetSense AI is an OCR-based pet mood detection application built with Python and
 ## Live Demo
 
 https://petsenseai-wwtfm94t4ljy3djec6ud2d.streamlit.app/
-
 ## Features
 
 * Upload pet images
