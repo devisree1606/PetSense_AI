@@ -1,38 +1,40 @@
-# PetSense_AI
+# PetSense AI
 
-[PetSense_AI](http://localhost:8504/)
+PetSense AI is an OCR-based pet mood detection application built with Python and Streamlit.
 
-PetSense AI is a simple Streamlit application for analyzing pet images.
+## Live Demo
+
+https://petsenseai-wwtfm94t4ljy3djec6ud2d.streamlit.app/
 
 ## Features
 
-* Upload pet image
-* View uploaded image
-* Analyze pet image
-* Get basic pet information
-* Get health observations
-* Get care suggestions
+* Upload pet images
+* OCR text extraction
+* Pet mood detection
+* Mood confidence score
+* Pet-care recommendations
+* Detailed analysis
+* Downloadable report
 
-## Technologies Used
+## Technologies
 
 * Python
 * Streamlit
 * Pillow
-* Hugging Face
+* Pytesseract
+* Tesseract OCR
 
-## How to Run
+## How It Works
 
-Install the required packages and run the Streamlit application using `streamlit run app.py`.
+Image → OCR → Text Analysis → Mood Detection → Recommendation
 
-Click here to open the project: [PetSense_AI](http://localhost:8504/)
+## Run Locally
 
-## Project Files
 
-* app.py
-* pet_analyzer.py
-* requirements.txt
-* README.md
+pip install -r requirements.txt
+streamlit run app.py
+
 
 ## Note
 
-PetSense AI provides general observations and does not replace professional veterinary advice.
+PetSense AI provides an AI-assisted mood estimate for educational purposes. It is not a veterinary diagnosis.
