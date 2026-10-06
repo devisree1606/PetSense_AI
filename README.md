@@ -2,44 +2,37 @@
 
 [PetSense_AI](http://localhost:8503/)
 
-PetSense AI is a simple Streamlit project for analyzing pet images.
+PetSense AI is a simple Streamlit application for analyzing pet images.
 
 ## Features
 
-* Upload a pet image
-* View the uploaded image
-* Analyze the pet image
+* Upload pet image
+* View uploaded image
+* Analyze pet image
 * Get basic pet information
 * Get health observations
 * Get care suggestions
 
-## Technologies
+## Technologies Used
 
 * Python
 * Streamlit
 * Pillow
 
-## Run the Project
+## How to Run
 
-```text
-pip install -r requirements.txt
-streamlit run app.py
-```
+Install the required packages and run the Streamlit application using `streamlit run app.py`.
 
-Then open the project:
-
-[PetSense_AI](http://localhost:8503/)
+Click here to open the project: [PetSense_AI](http://localhost:8503/)
 
 ## Project Files
 
-```text
-petsense_ai/
-├── app.py
-├── pet_analyzer.py
-├── requirements.txt
-└── README.md
-```
+* app.py
+* pet_analyzer.py
+* requirements.txt
+* README.md
 
 ## Note
 
 PetSense AI provides general observations and does not replace professional veterinary advice.
+
