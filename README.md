@@ -4,6 +4,9 @@
 
 PetMood AI is a simple AI-assisted application designed to analyze pet images and provide an estimated mood, basic care recommendations, and safety reminders for dogs and cats.
 
+#Live Demo
+https://petsenseai-wwtfm94t4ljy3djec6ud2d.streamlit.app/
+
 ## Features
 
 * Upload dog or cat images
