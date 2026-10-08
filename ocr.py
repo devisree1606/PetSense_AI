@@ -1,37 +1,28 @@
-
 import pytesseract
 from PIL import Image, ImageEnhance, ImageOps
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-
 def extract_text(image):
     try:
+        image = image.convert("RGB")
         image = ImageOps.grayscale(image)
-        image = ImageEnhance.Contrast(image).enhance(2.0)
 
-        text = pytesseract.image_to_string(
-            image, config="--oem 3 --psm 6"
+        # Resize image
+        image = image.resize(
+            (image.width * 2, image.height * 2)
         )
-        return text.strip() if text.strip() else "No text found"
 
-    except Exception:
-        return ""
+        # Improve contrast
+        image = ImageEnhance.Contrast(image).enhance(2.5)
 
+        # Extract text
+        text = pytesseract.image_to_string(
+            image, config="--oem 3 --psm 11"
+        )
 
-def detect_mood(text):
-    text = text.lower()
+        return text.strip() if text.strip() else "No readable text found."
 
-    moods = {
-        "PLAYFUL": ["playful", "happy", "playing", "excited", "running"],
-        "RELAXED": ["relaxed", "calm", "sleeping", "resting", "peaceful"],
-        "ANGRY": ["angry", "aggressive", "growling", "furious"],
-        "SCARED": ["scared", "afraid", "frightened", "nervous"]
-    }
+    except Exception as e:
+        return f"OCR Error: {e}"
 
-    for mood, words in moods.items():
-        if any(word in text for word in words):
-            return mood
-
-    return "UNKNOWN"
-    
