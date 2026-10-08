@@ -1,21 +1,20 @@
-# PetSense AI
+# PetMood AI
 
-PetSense AI is an OCR-based pet mood detection application built with Python and Streamlit.
+### AI-Assisted Pet Mood and Behavior Assistant
 
-## Live Demo
+PetMood AI is a simple AI-assisted application designed to analyze pet images and provide an estimated mood, basic care recommendations, and safety reminders for dogs and cats.
 
-https://petsenseai-wwtfm94t4ljy3djec6ud2d.streamlit.app/
 ## Features
 
-* Upload pet images
-* OCR text extraction
-* Pet mood detection
-* Mood confidence score
-* Pet-care recommendations
-* Detailed analysis
-* Downloadable report
+* Upload dog or cat images
+* Identify pet type
+* Estimate pet mood
+* Display mood confidence score
+* Extract text using OCR
+* Provide pet care recommendations
+* Display safety reminders
 
-## Technologies
+## Technologies Used
 
 * Python
 * Streamlit
@@ -23,17 +22,36 @@ https://petsenseai-wwtfm94t4ljy3djec6ud2d.streamlit.app/
 * Pytesseract
 * Tesseract OCR
 
-## How It Works
+## Installation
 
-Image → OCR → Text Analysis → Mood Detection → Recommendation
+Install the required Python libraries:
 
-## Run Locally
+```bash
+pip install streamlit pillow pytesseract
+```
 
+Install Tesseract OCR separately and configure its executable path in `ocr.py`.
 
-pip install -r requirements.txt
+## Run the Application
+
+```bash
 streamlit run app.py
+```
+
+## Live Demo
 
 
-## Note
+## Project Structure
 
-PetSense AI provides an AI-assisted mood estimate for educational purposes. It is not a veterinary diagnosis.
+```text
+PetMood AI/
+├── app.py
+├── ocr.py
+├── requirements.txt
+├── packages.txt
+└── README.md
+```
+
+## Disclaimer
+
+PetMood AI provides AI-assisted estimates for educational purposes only. It is not a veterinary diagnostic tool. Consult a qualified veterinarian if your pet shows unusual behavior or signs of illness.
