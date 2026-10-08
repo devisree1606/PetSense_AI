@@ -25,4 +25,3 @@ def extract_text(image):
 
     except Exception as e:
         return f"OCR Error: {e}"
-
