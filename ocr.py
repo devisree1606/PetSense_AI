@@ -1,27 +1,18 @@
 import pytesseract
-from PIL import Image, ImageEnhance, ImageOps
+from PIL import Image
+import os
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+if os.name == "nt": 
+    pytesseract.pytesseract.tesseract_cmd = ( 
+        r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    )
 
-def extract_text(image):
-    try:
-        image = image.convert("RGB")
-        image = ImageOps.grayscale(image)
 
-        # Resize image
-        image = image.resize(
-            (image.width * 2, image.height * 2)
-        )
+def extract_text_from_image(image):
+    text = pytesseract.image_to_string(image)
+    return text
 
-        # Improve contrast
-        image = ImageEnhance.Contrast(image).enhance(2.5)
 
-        # Extract text
-        text = pytesseract.image_to_string(
-            image, config="--oem 3 --psm 11"
-        )
-
-        return text.strip() if text.strip() else "No readable text found."
-
-    except Exception as e:
-        return f"OCR Error: {e}"
+def extract_text_from_pdf_image(image):
+    text = pytesseract.image_to_string(image)
+    return text 
