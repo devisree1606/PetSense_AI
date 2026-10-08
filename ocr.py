@@ -1,4 +1,4 @@
-```python
+
 import pytesseract
 from PIL import Image, ImageEnhance, ImageOps
 
@@ -34,4 +34,4 @@ def detect_mood(text):
             return mood
 
     return "UNKNOWN"
-```
+    
